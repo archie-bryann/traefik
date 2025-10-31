@@ -1,0 +1,15 @@
+---
+services:
+  nginx:
+    container_name: nginx-demo-1
+    image: nginx:latest
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx-http.rule=Host(`ec2-54-234-55-118.compute-1.amazonaws.com`)
+      - traefix.http.routers.nginx-http.entrypoints=web
+    restart: unless-stopped
+networks:
+  frontend:
+    external: true
